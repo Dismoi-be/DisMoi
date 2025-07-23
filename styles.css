@@ -60,3 +60,28 @@ footer {
     padding: 20px 0;
     margin-top: 30px;
 }
+.redes-sociais {
+  text-align: center;
+  margin: 40px 0;
+  font-size: 1.2rem;
+  color: #003580;
+}
+
+.icones-sociais {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.icones-sociais img {
+  height: 32px;
+  width: 32px;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.icones-sociais img:hover {
+  transform: scale(1.15);
+}
+
