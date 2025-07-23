@@ -1,59 +1,519 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Curso de francês para brasileiros. Aprenda francês de forma eficaz e divertida.">
-    <title>Aprenda Francês - Curso para Brasileiros</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Francês Fácil - Curso de Francês para Brasileiros</title>
+<style>
+  /* Reset básico */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: #f9f9f9;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Container padrão */
+  .container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  header {
+    background: #003580; /* Azul França */
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    cursor: default;
+  }
+  nav a {
+    margin-left: 20px;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  nav a:hover {
+    color: #f03c3c; /* vermelho França */
+  }
+
+  /* Banner */
+  .banner {
+    background: url('https://images.unsplash.com/photo-1527259218654-83e13e7da1d7?auto=format&fit=crop&w=1470&q=80') no-repeat center/cover;
+    color: white;
+    padding: 100px 0;
+    text-align: center;
+  }
+  .banner h1 {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+  }
+  .banner p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+  }
+  .banner button {
+    background: #f03c3c;
+    border: none;
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(240,60,60,0.6);
+    transition: background 0.3s;
+  }
+  .banner button:hover {
+    background: #d73434;
+  }
+
+  /* Seção Benefícios */
+  .benefits {
+    background: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .benefits h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: #003580;
+  }
+  .benefits-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .benefit-item {
+    flex: 1 1 250px;
+    max-width: 300px;
+    background: #f3f7ff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,53,128,0.1);
+  }
+  .benefit-item h3 {
+    margin-bottom: 15px;
+    color: #003580;
+  }
+  .benefit-item p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Seção Como Funciona */
+  .how-it-works {
+    background: #e6f0ff;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .how-it-works h2 {
+    margin-bottom: 40px;
+    color: #003580;
+    font-size: 2rem;
+  }
+  .steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  .step {
+    flex: 1 1 220px;
+    max-width: 250px;
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  .step-number {
+    background: #f03c3c;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .step h3 {
+    color: #003580;
+    margin-bottom: 12px;
+  }
+  .step p {
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Depoimentos */
+  .testimonials {
+    background: white;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .testimonials h2 {
+    margin-bottom: 40px;
+    color: #003580;
+    font-size: 2rem;
+  }
+  .testimonial-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .testimonial-item {
+    flex: 1 1 280px;
+    max-width: 300px;
+    background: #f3f7ff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,53,128,0.1);
+    font-style: italic;
+    color: #444;
+    position: relative;
+  }
+  .testimonial-item::before {
+    content: "“";
+    font-size: 3rem;
+    color: #f03c3c;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+  }
+  .testimonial-author {
+    margin-top: 15px;
+    font-weight: 700;
+    color: #003580;
+  }
+
+  /* Planos */
+  .plans {
+    background: #e6f0ff;
+    padding: 60px 0;
+    text-align: center;
+  }
+  .plans h2 {
+    margin-bottom: 40px;
+    color: #003580;
+    font-size: 2rem;
+  }
+  .plan-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .plan-item {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,53,128,0.15);
+    max-width: 300px;
+    flex: 1 1 280px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .plan-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #003580;
+    margin-bottom: 10px;
+  }
+  .plan-price {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #f03c3c;
+    margin-bottom: 20px;
+  }
+  .plan-desc {
+    flex-grow: 1;
+    color: #555;
+    margin-bottom: 25px;
+  }
+  .plan-button {
+    background: #f03c3c;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 40px;
+    padding: 15px 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+  }
+  .plan-button:hover {
+    background: #d73434;
+  }
+
+  /* FAQ */
+  .faq {
+    background: white;
+    padding: 60px 0;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+  .faq h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #003580;
+    font-size: 2rem;
+  }
+  .faq-item {
+    margin-bottom: 20px;
+  }
+  .faq-question {
+    font-weight: 700;
+    color: #003580;
+    cursor: pointer;
+    position: relative;
+    padding-right: 25px;
+  }
+  .faq-question::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    font-size: 1.4rem;
+    transition: transform 0.3s;
+  }
+  .faq-question.active::after {
+    content: "-";
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    color: #555;
+    padding-left: 10px;
+    transition: max-height 0.4s ease;
+  }
+  .faq-answer.open {
+    max-height: 200px;
+    margin-top: 8px;
+  }
+
+  /* Footer */
+  footer {
+    background: #003580;
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+  }
+  footer a {
+    color: #f03c3c;
+    font-weight: 700;
+    margin: 0 8px;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .benefits-list, .steps, .testimonial-list, .plan-list {
+      flex-direction: column;
+      align-items: center;
+    }
+    nav a {
+      margin-left: 10px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <div class="logo">
-            <h1>Aprenda Francês</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="curso.html">Curso</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="login.html">Cadastro</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Banner Principal -->
-    <section class="banner">
-        <h2>Aprenda Francês de Forma Rápida e Eficaz</h2>
-        <p>Curso completo para brasileiros que querem aprender francês, com aulas interativas e conteúdo exclusivo.</p>
-        <a href="curso.html" class="btn">Comece Agora</a>
-    </section>
+<header>
+  <div class="container">
+    <div class="logo">Francês Fácil</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#curso">Curso</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contato">Contato</a>
+      <a href="#login">Login</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- Sobre o Curso -->
-    <section class="sobre-curso">
-        <h3>O que você vai aprender?</h3>
-        <p>O curso oferece uma abordagem simples e direta para você aprender francês, com aulas teóricas, práticas e interativas. Aprenda de forma eficiente, no seu tempo!</p>
-    </section>
+<section class="banner" id="home">
+  <div class="container">
+    <h1>Aprenda francês do zero e fale com confiança!</h1>
+    <p>Curso online pensado especialmente para brasileiros, com aulas práticas e flexíveis.</p>
+    <button onclick="alert('Vamos começar!')">Comece agora</button>
+  </div>
+</section>
 
-    <!-- Depoimentos -->
-    <section class="depoimentos">
-        <h3>O que os alunos dizem:</h3>
-        <div class="depoimento">
-            <p>"Adorei o curso! Agora consigo me comunicar em francês sem dificuldades." - Ana Silva</p>
-        </div>
-        <div class="depoimento">
-            <p>"O conteúdo é muito claro e as aulas são super interativas!" - João Pereira</p>
-        </div>
-    </section>
+<section class="benefits" id="sobre">
+  <div class="container">
+    <h2>Por que escolher nosso curso?</h2>
+    <div class="benefits-list">
+      <div class="benefit-item">
+        <h3>Aulas 100% online e flexíveis</h3>
+        <p>Estude onde e quando quiser, no seu ritmo.</p>
+      </div>
+      <div class="benefit-item">
+        <h3>Material exclusivo para brasileiros</h3>
+        <p>Conteúdo adaptado para facilitar seu aprendizado.</p>
+      </div>
+      <div class="benefit-item">
+        <h3>Professores nativos e experientes</h3>
+        <p>Aprenda com quem fala francês de verdade.</p>
+      </div>
+      <div class="benefit-item">
+        <h3>Comunidade para tirar dúvidas</h3>
+        <p>Suporte e troca de experiências com outros alunos.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 Aprenda Francês | Todos os direitos reservados</p>
-        <p><a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
-    </footer>
+<section class="how-it-works" id="curso">
+  <div class="container">
+    <h2>Como funciona</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Inscreva-se no curso</h3>
+        <p>Cadastre-se facilmente e escolha seu plano.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Acesse a área do aluno</h3>
+        <p>Tenha todo o conteúdo disponível online a qualquer hora.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Pratique com aulas e exercícios</h3>
+        <p>Faça atividades e participe de aulas ao vivo.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Receba sua certificação</h3>
+        <p>Comprove seu aprendizado com nosso certificado.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<section class="testimonials" id="depoimentos">
+  <div class="container">
+    <h2>O que dizem nossos alunos</h2>
+    <div class="testimonial-list">
+      <div class="testimonial-item">
+        <p>O curso me ajudou a perder o medo de falar francês e a entender a cultura!</p>
+        <div class="testimonial-author">– Ana Souza</div>
+      </div>
+      <div class="testimonial-item">
+        <p>Conteúdo claro e professores super atenciosos. Recomendo muito!</p>
+        <div class="testimonial-author">– Carlos Silva</div>
+      </div>
+      <div class="testimonial-item">
+        <p>Estudo no meu ritmo e já consigo me comunicar melhor em viagens.</p>
+        <div class="testimonial-author">– Mariana Oliveira</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="plans" id="planos">
+  <div class="container">
+    <h2>Planos do curso</h2>
+    <div class="plan-list">
+      <div class="plan-item">
+        <div class="plan-title">Plano Básico</div>
+        <div class="plan-price">R$ 199</div>
+        <div class="plan-desc">Acesso às aulas gravadas + material didático digital.</div>
+        <button class="plan-button" onclick="alert('Plano Básico escolhido!')">Comprar</button>
+      </div>
+      <div class="plan-item">
+        <div class="plan-title">Plano Completo</div>
+        <div class="plan-price">R$ 399</div>
+        <div class="plan-desc">Tudo do Básico + aulas ao vivo semanais e suporte direto.</div>
+        <button class="plan-button" onclick="alert('Plano Completo escolhido!')">Comprar</button>
+      </div>
+      <div class="plan-item">
+        <div class="plan-title">Plano Premium</div>
+        <div class="plan-price">R$ 699</div>
+        <div class="plan-desc">Plano Completo + coaching individual e certificado avançado.</div>
+        <button class="plan-button" onclick="alert('Plano Premium escolhido!')">Comprar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <h2>Dúvidas frequentes</h2>
+  <div class="faq-item">
+    <div class="faq-question">Preciso saber inglês para fazer o curso?</div>
+    <div class="faq-answer">Não, o curso é totalmente focado para brasileiros que querem aprender francês sem precisar do inglês.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Posso estudar pelo celular?</div>
+    <div class="faq-answer">Sim! Nosso site e materiais são totalmente responsivos e funcionam bem em smartphones.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-question">Qual é a duração do curso?</div>
+    <div class="faq-answer">Você pode avançar no seu ritmo, mas o conteúdo completo dura cerca de 6 meses.</div>
+  </div>
+</section>
+
+<footer id="contato">
+  <p>Francês Fácil © 2025 | Contato: <a href="mailto:contato@francesfacil.com.br">contato@francesfacil.com.br</a></p>
+  <p>
+    Siga-nos: 
+    <a href="#" target="_blank" rel="noopener noreferrer">TikTok</@dismoi.be> | 
+    <a href="#" target="_blank" rel="noopener noreferrer">Instagram</@dismoi_be> | 
+    <a href="#" target="_blank" rel="noopener noreferrer">Youtube</@dismoi_be>
+  </p>
+</footer>
+
+<script>
+  // Script simples para FAQ toggle
+  const questions = document.querySelectorAll('.faq-question');
+  questions.forEach(q => {
+    q.addEventListener('click', () => {
+      q.classList.toggle('active');
+      const answer = q.nextElementSibling;
+      if (answer.classList.contains('open')) {
+        answer.classList.remove('open');
+      } else {
+        answer.classList.add('open');
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
