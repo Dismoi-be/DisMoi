@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Francês Fácil - Curso de Francês</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+    header {
+      background: #003580;
+      color: white;
+      padding: 15px 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    nav a {
+      margin-left: 20px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: #f03c3c;
+    }
+
+    .login-section {
+      background: #fff;
+      padding: 60px 20px;
+    }
+    .login-container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #f3f7ff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .login-container h2 {
+      text-align: center;
+      color: #003580;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .login-container button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #f03c3c;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .login-container button:hover {
+      background: #d12f2f;
+    }
+    .login-container .toggle {
+      margin-top: 15px;
+      text-align: center;
+      cursor: pointer;
+      color: #003580;
+      font-weight: bold;
+    }
+    .login-container #message {
+      text-align: center;
+      color: green;
+    }
+    .login-container #error {
+      text-align: center;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">Francês Fácil</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#curso">Curso</a>
+        <a href="#login">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="login-section" id="login">
+    <div class="login-container">
+      <h2 id="form-title">Login</h2>
+      <div id="message"></div>
+      <div id="error"></div>
+
+      <input type="text" id="nome" placeholder="Nome completo" style="display: none;" />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="senha" placeholder="Senha" required />
+      <button onclick="handleAction()">Entrar</button>
+      <div class="toggle" onclick="toggleMode()">Não tem conta? Cadastre-se</div>
+    </div>
+  </section>
+
+  <script>
+    let isLogin = true;
+
+    function toggleMode() {
+      isLogin = !isLogin;
+      document.getElementById('form-title').innerText = isLogin ? 'Login' : 'Cadastro';
+      document.getElementById('nome').style.display = isLogin ? 'none' : 'block';
+      document.querySelector('#login button').innerText = isLogin ? 'Entrar' : 'Cadastrar';
+      document.querySelector('#login .toggle').innerText = isLogin ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Fazer login';
+      clearMessages();
+    }
+
+    function clearMessages() {
+      document.getElementById('message').innerText = '';
+      document.getElementById('error').innerText = '';
+    }
+
+    function handleAction() {
+      clearMessages();
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!email || !senha || (!isLogin && !nome)) {
+        document.getElementById('error').innerText = 'Preencha todos os campos.';
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+      if (isLogin) {
+        const user = users.find(u => u.email === email);
+        if (user && user.senha === btoa(senha)) {
+          document.getElementById('message').innerText = `Bem-vindo(a), ${user.nome}!`;
+        } else {
+          document.getElementById('error').innerText = 'Email ou senha inválidos.';
+        }
+      } else {
+        const exists = users.find(u => u.email === email);
+        if (exists) {
+          document.getElementById('error').innerText = 'Este email já está cadastrado.';
+          return;
+        }
+        users.push({ nome, email, senha: btoa(senha) });
+        localStorage.setItem('users', JSON.stringify(users));
+        document.getElementById('message').innerText = 'Cadastro realizado com sucesso! Agora faça login.';
+        toggleMode();
+      }
+    }
+  </script>
+
+</body>
+</html>
