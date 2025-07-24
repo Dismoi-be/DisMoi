@@ -350,6 +350,57 @@
   }
 </style>
 </head>
+   <script>
+    let isLogin = true;
+
+    function toggleMode() {
+      isLogin = !isLogin;
+      document.getElementById('form-title').innerText = isLogin ? 'Login' : 'Cadastro';
+      document.getElementById('nome').style.display = isLogin ? 'none' : 'block';
+      document.querySelector('#login button').innerText = isLogin ? 'Entrar' : 'Cadastrar';
+      document.querySelector('#login .toggle').innerText = isLogin ? 'Não tem conta? Cadastre-se' : 'Já tem conta? Fazer login';
+      clearMessages();
+    }
+
+    function clearMessages() {
+      document.getElementById('message').innerText = '';
+      document.getElementById('error').innerText = '';
+    }
+
+    function handleAction() {
+      clearMessages();
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!email || !senha || (!isLogin && !nome)) {
+        document.getElementById('error').innerText = 'Preencha todos os campos.';
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+      if (isLogin) {
+        const user = users.find(u => u.email === email);
+        if (user && user.senha === btoa(senha)) {
+          document.getElementById('message').innerText = `Bem-vindo(a), ${user.nome}!`;
+        } else {
+          document.getElementById('error').innerText = 'Email ou senha inválidos.';
+        }
+      } else {
+        const exists = users.find(u => u.email === email);
+        if (exists) {
+          document.getElementById('error').innerText = 'Este email já está cadastrado.';
+          return;
+        }
+        users.push({ nome, email, senha: btoa(senha) });
+        localStorage.setItem('users', JSON.stringify(users));
+        document.getElementById('message').innerText = 'Cadastro realizado com sucesso! Agora faça login.';
+        toggleMode();
+      }
+    }
+  </script>
+
 <body>
 
 <header>
